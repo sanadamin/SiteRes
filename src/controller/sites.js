@@ -36,6 +36,14 @@ export default ({ config, db }) => {
       res.json(sites);
     });
   });
+api.get('/delete/:name',(req,res) =>{
+    Site.remove({sitename:req.params.name},(err,site)=>{
+      if(err){
+        res.send(err);
+      }
+      res.json({message: 'site has been deleted'});
+    });
+  });
   api.post('/add', (req, res) => {
     let site = new Site();
     site.sitename = req.body.sitename;
